@@ -39,12 +39,17 @@
                     {{-- Card Body --}}
                     <div
                         class="card-body {{ $auth_type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
-                        <form action="">
+                        <form action="{{ url('create-empresa/create') }}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="logo">Logo</label>
-                                        <input type="file" id="file" name="logo" class="form-control ">
+                                        <input type="file" id="file" name="logo" accept=".jpg,.jpeg,.png"
+                                         class="form-control " required>
+                                        @error('logo')
+                                        <small style="color: red;">{{$message }}</small>
+                                        @enderror
                                         <br>
                                         <center><output id="list"></output></center>
                                         <script>
@@ -77,7 +82,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pais">Pais</label>
-                                                <select name="" id="select_pais" class="form-control">
+                                                <select name="pais" id="select_pais" class="form-control">
                                                     @foreach ($paises as $paise)
                                                         <option value="{{ $paise->id }}">{{ $paise->name }}</option>
                                                     @endforeach
@@ -107,27 +112,37 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nombre_empresa">Nombre de la empresa</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" name="nombre_empresa" value="{{ old('nombre_empresa') }}" class="form-control" required>
+                                                @error('nombre_empresa')
+                                                <small style="color: red;">{{$message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="tipo_empresa">Tipo de empresa</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" value="{{ old('tipo_empresa') }}" name="tipo_empresa"  class="form-control" required>
+                                                @error('tipo_empresa')
+                                                <small style="color: red;">{{$message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nit">NIT</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" value="{{ old('nit') }}" name="nit" class="form-control" required>
+                                                @error('nit')
+                                                <small style="color: red;">{{$message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="moneda">Moneda</label>
-                                                <select name="" id="" class="form-control">
+                                                <select name="moneda" id="" class="form-control">
                                                     @foreach ($monedas as $moneda)
-                                                        <option value="{{ $moneda->symbol }}">{{$moneda->symbol}}</option>
+                                                    <option value="{{ $moneda->symbol }}">{{ $moneda->name . ' ' . $moneda->symbol }}</option>
+
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -138,25 +153,37 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nombre_impuesto">Nombre del impuesto</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" value="{{ old('nombre_impuesto') }}" name="nombre_impuesto" class="form-control" required>
+                                                @error('nombre_impuesto')
+                                                <small style="color: red;">{{$message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="cantidad_impuesto">Impuesto</label>
-                                                <input type="number" class="form-control">
+                                                <input type="number" value="{{ old('cantidad_impuesto') }}" name="cantidad_impuesto" class="form-control" required placeholder="Cantidad">
+                                                @error('cantidad_impuesto')
+                                                <small style="color: red;">{{$message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="telefono">Telefonos de la empresa</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" value="{{ old('telefono') }}" name="telefono" class="form-control" required>
+                                                @error('telefono')
+                                                <small style="color: red;">{{$message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="correo">Correo de la empresa</label>
-                                                <input type="email" class="form-control">
+                                                <input type="email"  value="{{ old('correo') }}" name="correo" class="form-control" required>
+                                                @error('correo')
+                                                <small style="color: red;">{{$message }}</small>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -177,9 +204,9 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="codigo_postal">Codigo postal</label>
-                                                <select name="" id="" class="form-control">
+                                                <select name="codigo_postal" id="" class="form-control">
                                                     @foreach ($paises as $paise)
-                                                        <option value="{{ $paise->phone_code }}">{{ $paise->name + $paise->phone_code}}</option>
+                                                        <option value="{{ $paise->phone_code }}">{{ $paise->phone_code}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -187,6 +214,11 @@
                                     </div>
                                 </div>
 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-lg btn-primary btn-block">Crear empresa</button>
+                                </div>
                             </div>
                         </form>
                     </div>

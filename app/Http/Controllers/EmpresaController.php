@@ -49,7 +49,34 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // $datos = $request->all();
+       //return response()->json($datos);
+
+       $request->validate([
+       'nombre_empresa'=>'required',
+       'tipo_empresa'=>'required',
+       'nit'=>'required|unique:empresas',
+        'telefono'=>'required',
+        'correo'=>'required|unique:empresas',
+        'cantidad_impuesto'=>'required',
+        'nombre_impuesto'=>'required',
+        'direccion'=>'required',
+        'logo'=>'required|image|mimes:jpg,jpeg,png'
+       ]);
+
+        $table->string('nombre_empresa');
+        $table->string('tipo_empresa');
+        $table->string('nit')->unique();
+        $table->string('telefono');
+        $table->integer('correo')->unique();
+        $table->integer('cantidad_impuesto');
+        $table->string('nombre_impuesto');
+        $table->string('moneda');
+        $table->string('direccion');
+        $table->string('ciudad');
+        $table->string('departamento');
+        $table->string('codigo_postal');
+        $table->text('logo');
     }
 
     /**
