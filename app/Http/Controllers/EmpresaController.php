@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class EmpresaController extends Controller
 {
@@ -49,9 +52,11 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
+        /*provamos que llegan los datos*/
        // $datos = $request->all();
        //return response()->json($datos);
 
+       /*Validamos los datos */
        $request->validate([
        'nombre_empresa'=>'required',
        'tipo_empresa'=>'required',
@@ -64,19 +69,37 @@ class EmpresaController extends Controller
         'logo'=>'required|image|mimes:jpg,jpeg,png'
        ]);
 
-        $table->string('nombre_empresa');
-        $table->string('tipo_empresa');
-        $table->string('nit')->unique();
-        $table->string('telefono');
-        $table->integer('correo')->unique();
-        $table->integer('cantidad_impuesto');
-        $table->string('nombre_impuesto');
-        $table->string('moneda');
-        $table->string('direccion');
-        $table->string('ciudad');
-        $table->string('departamento');
-        $table->string('codigo_postal');
-        $table->text('logo');
+       /*Insertamos los datos*/
+       $empresa = new Empresa();
+       $empresa->pais= $request->pais;
+       $empresa->nombre_empresa= $request->nombre_empresa;
+       $empresa->tipo_empresa= $request->tipo_empresa;
+       $empresa->nit= $request->nit;
+       $empresa->telefono= $request->telefono;
+       $empresa->correo= $request->correo;
+       $empresa->cantidad_impuesto= $request->cantidad_impuesto;
+       $empresa->nombre_impuesto= $request->nombre_impuesto;
+       $empresa->moneda= $request->moneda;
+       $empresa->direccion= $request->direccion;
+       $empresa->ciudad= $request->ciudad;
+       $empresa->departamento= $request->departamento;
+       $empresa->codigo_postal= $request->codigo_postal;
+       $empresa->logo= $request->file('logo')->store('logos','public');
+       $empresa->save();
+
+       $usuario = new User();
+       $usuario->name="Admin";
+       $usuario->email=$request->correo;
+       $usuario->password=Hash::make($request['nit']);
+       $usuario->empresa_id=$empresa->id;
+       $usuario->save();
+
+       /*Autenticacion*/
+       Auth::login($usuario);
+
+       /*Retornamos a una vista*/
+       return redirect()->route('admin.index')
+       ->with('mensaje','Se registro la empresa de la manera correcta');
     }
 
     /**
@@ -92,7 +115,14 @@ class EmpresaController extends Controller
      */
     public function edit(Empresa $empresa)
     {
-        //
+        $paises = DB::table('countries')->get();
+        $estados = DB::table('states')->get();
+        $ciudades = DB::table('cities')->get();
+        $monedas = DB::table('currencies')->get();
+        $empresa_id =Auth::user()->empresa_id;
+        $empresa = Empresa::where('id',$empresa_id)->first();
+        $departamentos =DB::table('states')->where('country_id', $empresa->pais)->get();
+       return view('admin.configuraciones.edit',compact('paises','estados','ciudades','monedas','empresa','departamentos'));
     }
 
     /**

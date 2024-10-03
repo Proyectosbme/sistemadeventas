@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Sistema de ventas',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>SIS</b>VENTAS',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -295,43 +295,45 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
+        /*[
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
-        ],
+        ],*/
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
         // Sidebar items:
-        [
+        /*[
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
-        [
+        ],*/
+        /*[
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
-        ],
-        [
+        ],*/
+        /*[
             'text' => 'pages',
             'url' => 'admin/pages',
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
+        ],*/
+        /*['header' => 'account_settings'],*/
+        /*[
             'text' => 'profile',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
-        ],
+        ],*/
         [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Configuracion',
+            'url' => 'admin/configuracion',
+            'icon' => 'fas fa-fw fa-gear',
+            'classes' => 'bg-blue text-white',
+
         ],
         [
             'text' => 'multilevel',
@@ -371,7 +373,7 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
+       /* ['header' => 'labels'],
         [
             'text' => 'important',
             'icon_color' => 'red',
@@ -386,7 +388,7 @@ return [
             'text' => 'information',
             'icon_color' => 'cyan',
             'url' => '#',
-        ],
+        ],*/
     ],
 
     /*
@@ -424,6 +426,16 @@ return [
     */
 
     'plugins' => [
+        'FontAwesome' =>[
+            'active' =>true,
+            'files'=>[
+                [
+                    'type'=>'css',
+                    'asset'=>true,
+                    'location' =>'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
+                ],
+            ],
+        ],
         'Datatables' => [
             'active' => false,
             'files' => [
