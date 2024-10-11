@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Rutas Web
@@ -19,11 +22,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
-
 /*crear empresa*/
-Route::prefix('create-empresa')->controller(App\Http\Controllers\EmpresaController::class)->group(function () {
+Route::prefix('create-empresa')->controller(EmpresaController::class)->group(function () {
     Route::get('/', 'create')->name('admin.empresas.create');
     Route::get('/pais/{id_pais}', 'buscar_estado')->name('admin.empresas.create.buscar_estado');
     Route::get('/estado/{id_estado}', 'buscar_ciudad')->name('admin.empresas.create.buscar_ciudad');
@@ -31,22 +31,33 @@ Route::prefix('create-empresa')->controller(App\Http\Controllers\EmpresaControll
 });
 
 Route::middleware('auth')->group(function () {
+     /*Inicio*/
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
-    Route::prefix('admin')->controller(App\Http\Controllers\AdminController::class)->group(function () {
+     /*Administrador*/
+    Route::prefix('admin')->controller(AdminController::class)->group(function () {
         Route::get('/', 'index')->name('admin.index');
         Route::post('/', 'store')->name('admin.empresas.create.store');
     });
 
     /*configuracion*/
-    Route::prefix('admin/configuracion')->controller(App\Http\Controllers\EmpresaController::class)->group(function () {
+    Route::prefix('admin/configuracion')->controller(EmpresaController::class)->group(function () {
         Route::get('/', 'edit')->name('admin.configuracion.edit');
         Route::get('/pais/{id_pais}', 'buscar_estado')->name('admin.empresas.create.buscar_estado');
         Route::get('/estado/{id_estado}', 'buscar_ciudad')->name('admin.empresas.create.buscar_ciudad');
         Route::put('/{id}', 'update')->name('admin.configuracion.update');
     });
 
+    /*Roles*/
+    Route::prefix('admin/roles')->controller(RoleController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.roles.index');
+        Route::get('/create', 'create')->name('admin.roles.create');
+        Route::post('/create', 'store')->name('admin.roles.store');
+        Route::get('/{id}', 'show')->name('admin.roles.show');
+        Route::get('/{id}/edit', 'edit')->name('admin.roles.edit');
+        Route::put('/{id}', 'update')->name('admin.roles.update');
+
+    });
 
 
 });

@@ -336,6 +336,21 @@ return [
 
         ],
         [
+            /*<i class="fa-thin fa-user-check"></i>*/
+            /*<i class="fa-regular fa-list"></i> */
+            'text' => 'Roles',
+            'icon' => 'fas fa-user-check',
+            'classes' => 'bg-blue text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de roles',
+                    'url' => 'admin/roles',
+                    'icon' => 'fas fa-list',
+                    'classes' => 'bg-white text-black',
+                ],
+            ],
+        ],
+        [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
@@ -373,22 +388,22 @@ return [
                 ],
             ],
         ],
-       /* ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ],*/
+        /* ['header' => 'labels'],
+         [
+             'text' => 'important',
+             'icon_color' => 'red',
+             'url' => '#',
+         ],
+         [
+             'text' => 'warning',
+             'icon_color' => 'yellow',
+             'url' => '#',
+         ],
+         [
+             'text' => 'information',
+             'icon_color' => 'cyan',
+             'url' => '#',
+         ],*/
     ],
 
     /*
@@ -426,13 +441,13 @@ return [
     */
 
     'plugins' => [
-        'FontAwesome' =>[
-            'active' =>true,
-            'files'=>[
+        'FontAwesome' => [
+            'active' => true,
+            'files' => [
                 [
-                    'type'=>'css',
-                    'asset'=>true,
-                    'location' =>'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css',
                 ],
             ],
         ],

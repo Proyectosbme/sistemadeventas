@@ -43,7 +43,8 @@
                         <div class="mb-6">
                             <div class="flex items-center space-x-2 mb-4">
                                 <!-- Campo de búsqueda -->
-                                <label for="searchInput" class="block text-sm font-medium text-gray-700 sr-only">Buscar</label>
+                                <label for="searchInput"
+                                    class="block text-sm font-medium text-gray-700 sr-only">Buscar</label>
                                 <input type="text" id="searchInput" onkeyup="filterTable()" name="nombre"
                                     class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     placeholder="Nombre">
@@ -51,7 +52,8 @@
                                 <!-- Botón para agregar con icono "+" -->
                                 <button type="button" onclick="addRow()"
                                     class="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-3 rounded">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                        fill="currentColor">
                                         <path fill-rule="evenodd"
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd" />
@@ -129,52 +131,4 @@
 @stop
 
 @section('js')
-    >
-    <script>
-        // Función para filtrar los datos de la tabla según el input de búsqueda
-        function filterTable() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("userTable");
-            tr = table.getElementsByTagName("tr");
-
-            for (i = 1; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-
-        // Función para eliminar una fila
-        function removeRow(button) {
-            var row = button.closest('tr');
-            row.parentNode.removeChild(row);
-        }
-
-        // Función para agregar una nueva fila
-        function addRow() {
-            var table = document.getElementById("userTableBody");
-            var row = table.insertRow();
-
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-
-            cell1.innerHTML = "Nuevo Usuario";
-            cell2.innerHTML = "Nuevo Departamento";
-            cell3.innerHTML = "nuevo@ues.edu.sv";
-            cell4.innerHTML = '<button type="button" onclick="removeRow(this)" class="text-red-600 hover:text-red-900">' +
-                ' <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">' +
-                ' <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z" clip-rule="evenodd" /></svg></button>';
-        }
-    </script>
-
 @stop
