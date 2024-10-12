@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}', 'show')->name('admin.roles.show');
         Route::get('/{id}/edit', 'edit')->name('admin.roles.edit');
         Route::put('/{id}', 'update')->name('admin.roles.update');
+        Route::delete('/{id}', 'destroy')->name('admin.roles.destroy');
 
     });
 

@@ -58,12 +58,12 @@
     @if (($mensaje = Session::get('mensaje')) && ($icono = Session::get('icono')))
         <script>
             Swal.fire({
-                position: "top-end",
+                position: "center",
                 icon: "{{ $icono }}",
                 title: "{{ $mensaje }}",
                 showConfirmButton: false,
                 timer: 2500
             });
-        </script>S
+        </script>
     @endif
 @stop

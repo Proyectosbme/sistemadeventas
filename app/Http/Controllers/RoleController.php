@@ -50,7 +50,7 @@ class RoleController extends Controller
             /*Retornamos a una vista*/
             return redirect()->route('admin.roles.index')
                 ->with('mensaje', 'Rol agregado existosamente')
-                ->with('icono', 'sucess');
+                ->with('icono', 'success');
             } catch (\Exception $e) {
                 // Opcionalmente, podrías loguear el error:
                 \Log::error('Error al agregar el rol: ' . $e->getMessage());
@@ -97,7 +97,7 @@ class RoleController extends Controller
         /*Retornamos a una vista*/
         return redirect()->route('admin.roles.index')
             ->with('mensaje', 'Rol modifica existosamente')
-            ->with('icono', 'sucess');
+            ->with('icono', 'success');
 
     }
 
@@ -106,6 +106,9 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Role::destroy($id);
+        return redirect()->route('admin.roles.index')
+        ->with('mensaje', 'Rol elimino existosamente')
+        ->with('icono', 'success');
     }
 }
