@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>SIS</b>VENTAS',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'images/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -351,6 +351,21 @@ return [
             ],
         ],
         [
+            /*<i class="fa-thin fa-user-check"></i>*/
+            /*<i class="fa-regular fa-list"></i> */
+            'text' => 'Usuarios',
+            'icon' => 'fas fa-users',
+            'classes' => 'bg-blue text-white',
+            'submenu' => [
+                [
+                    'text' => 'Listado de usuarios',
+                    'url' => 'admin/usuarios',
+                    'icon' => 'fas fa-user',
+                    'classes' => 'bg-white text-black',
+                ],
+            ],
+        ],
+        [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
@@ -552,7 +567,7 @@ return [
             'close_all_other' => true,
             'scroll_left' => true,
             'scroll_right' => true,
-            'fullscreen' => true,
+            'fullscreen' => false,
         ],
         'options' => [
             'loading_screen' => 1000,

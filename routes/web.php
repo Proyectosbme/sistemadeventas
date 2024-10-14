@@ -5,6 +5,8 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UsuarioController;
+
 /*
 |--------------------------------------------------------------------------
 | Rutas Web
@@ -57,6 +59,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id}/edit', 'edit')->name('admin.roles.edit');
         Route::put('/{id}', 'update')->name('admin.roles.update');
         Route::delete('/{id}', 'destroy')->name('admin.roles.destroy');
+
+    });
+
+    /*Usuarios*/
+    Route::prefix('admin/usuarios')->controller(UsuarioController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.usuarios.index');
+        Route::get('/create', 'create')->name('admin.usuarios.create');
+        Route::post('/create', 'store')->name('admin.usuarios.store');
+        Route::get('/{id}', 'show')->name('admin.usuarios.show');
+        Route::get('/{id}/edit', 'edit')->name('admin.usuarios.edit');
+        Route::put('/{id}', 'update')->name('admin.usuarios.update');
+        Route::delete('/{id}', 'destroy')->name('admin.usuarios.destroy');
 
     });
 
