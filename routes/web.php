@@ -34,7 +34,7 @@ Route::prefix('create-empresa')->controller(EmpresaController::class)->group(fun
 
 Route::middleware('auth')->group(function () {
      /*Inicio*/
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [AdminController::class, 'index'])->name('home');
 
      /*Administrador*/
     Route::prefix('admin')->controller(AdminController::class)->group(function () {

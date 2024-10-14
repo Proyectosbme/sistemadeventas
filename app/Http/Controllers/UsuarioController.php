@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Return_;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsuarioController extends Controller
 {
@@ -13,7 +16,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
+        $empresa_id = Auth::user()->empresa_id;
+        $usuarios = User::where('empresa_id', $empresa_id)->get();
         return view('admin.usuarios.index', compact('usuarios'));
     }
 
@@ -22,7 +26,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('admin.usuarios.create', compact('roles'));
     }
 
     /**
@@ -30,7 +35,30 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validación de datos
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
+            'role' => 'required|exists:roles,name', // Asegúrate de que el rol exista en la tabla roles
+        ]);
+
+        // Inserción de datos
+        $usuario = new User();
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
+        $usuario->password = Hash::make($request->password);
+        $usuario->empresa_id = Auth::user()->empresa_id;
+
+        // Guardar usuario
+        $usuario->save();
+
+        // Asignar rol
+        $usuario->assignRole($request->role);
+
+        return redirect()->route('admin.usuarios.index')
+            ->with('mensaje', 'Usuario agregado exitosamente')
+            ->with('icono', 'success');
     }
 
     /**
