@@ -1,20 +1,14 @@
 @extends('adminlte::page')
 
-
 @section('content_header')
-
     <h3 class="text-xl font-bold leading-none text-gray-900 blue:text-white">Detalle del rol {{ $rol->name }}</h3>
-
     <hr>
-
-
 @stop
 
 @section('content')
-    <div class="card card-outline card-info" style="box-shadow: 5px 5px 5px 5px #cccccc " class="">
+    <div class="card card-outline card-info" style="box-shadow: 5px 5px 5px 5px #cccccc;">
         <div class="row">
-            <div
-                class="w-full col-span-12 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div class="w-full col-span-12 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex items-center justify-between mb-4">
                     <h5 class="text-l font-bold leading-none text-gray-900 dark:text-white">Datos almacenados</h5>
                     <a href="{{ url('/admin/roles/') }}"
@@ -26,43 +20,24 @@
                         </svg>
                         Regresar
                     </a>
-
                 </div>
+
                 <div class="flow-root">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-center rtl:text-center text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-2">
-                                        Identificador
-                                    </th>
-                                    <th scope="col" class="px-6 py-2">
-                                        Nombre del rol
-                                    </th>
-                                    <th scope="col" class="px-6 py-2">
-                                        Medio de creacion
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <tr
-                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row"
-                                        class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $rol->id }}
-                                    </th>
-                                    <td class="px-6 py-2">
-                                        {{ $rol->name }}
-                                    </td>
-                                    <td class="px-6 py-2">
-                                        {{ $rol->guard_name }}
-                                    </td>
-                                </tr>
-
-                            </tbody>
-
-                        </table>
+                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Identificador:</h6>
+                                <p class="text-gray-900 dark:text-white">{{ $rol->id }}</p>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Nombre del rol:</h6>
+                                <p class="text-gray-900 dark:text-white">{{ $rol->name }}</p>
+                            </div>
+                            <div>
+                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Medio de creación:</h6>
+                                <p class="text-gray-900 dark:text-white">{{ $rol->guard_name }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,11 +46,7 @@
 @stop
 
 @section('css')
-
 @stop
-<!-- alertas -->
+
 @section('js')
-
-
-
 @stop

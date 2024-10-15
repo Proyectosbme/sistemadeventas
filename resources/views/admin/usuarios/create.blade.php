@@ -40,7 +40,7 @@
                                 usuario</label>
                             <input type="text" id="name" name="name" value="{{ old('name') }}"
                                 class="bg-gray-50 border {{ $errors->has('name') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="John" required />
+                                placeholder="Ingrese el nombre..." required />
                             @if ($errors->has('name'))
                                 <span class="text-red-500 text-sm">{{ $errors->first('name') }}</span>
                             @endif
@@ -50,7 +50,7 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
                             <input type="email" id="email" value="{{ old('email') }}" name="email"
                                 class="bg-gray-50 border {{ $errors->has('email') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Doe" required />
+                                placeholder="correo@domionio.com" required />
                             @if ($errors->has('email'))
                                 <span class="text-red-500 text-sm">{{ $errors->first('email') }}</span>
                             @endif
@@ -61,7 +61,7 @@
                             <input type="password" id="password" name="password" value="{{ old('password') }}"
                                 class="bg-gray-50 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="•••••••••" required />
-                                @if ($errors->has('password'))
+                            @if ($errors->has('password'))
                                 <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>
                             @endif
                         </div>
@@ -73,7 +73,7 @@
                                 value="{{ old('password_confirmation') }}"
                                 class="bg-gray-50 border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="•••••••••" required />
-                                @if ($errors->has('password_confirmation'))
+                            @if ($errors->has('password_confirmation'))
                                 <span class="text-red-500 text-sm">{{ $errors->first('password_confirmation') }}</span>
                             @endif
                         </div>

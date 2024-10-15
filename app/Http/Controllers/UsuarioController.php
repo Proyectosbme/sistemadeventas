@@ -49,7 +49,7 @@ class UsuarioController extends Controller
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->password);
         $usuario->empresa_id = Auth::user()->empresa_id;
-       
+
         // Guardar usuario
         $usuario->save();
 
@@ -66,7 +66,8 @@ class UsuarioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $usuario = User::find($id);
+        return view('admin.usuarios.show', compact('usuario'));
     }
 
     /**
@@ -74,7 +75,9 @@ class UsuarioController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $roles = Role::all();
+        $usuario = User::find($id);
+        return view('admin.usuarios.edit', compact('usuario', 'roles'));
     }
 
     /**
@@ -82,7 +85,17 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        // Validación de datos
+        $request->validate([
+            'name' => 'required',
+            'email' =>'required|unique:users,email,'.$id,
+        ]);
+        /*provamos que llegan los datos*/
+        $datos = $request->all();
+        return response()->json($datos);
+
+
     }
 
     /**
