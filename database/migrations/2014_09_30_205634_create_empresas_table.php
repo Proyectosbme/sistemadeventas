@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('tipo_empresa');
             $table->string('nit')->unique();
             $table->string('telefono');
-            $table->integer('correo')->unique();
+            $table->string('correo')->unique();
             $table->integer('cantidad_impuesto');
             $table->string('nombre_impuesto');
             $table->string('moneda');

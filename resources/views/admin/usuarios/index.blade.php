@@ -33,6 +33,9 @@
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-12 py-1">
+                                        Rol del usuario
+                                    </th>
+                                    <th scope="col" class="px-12 py-1">
                                         Usuario
                                     </th>
                                     <th scope="col" class="px-12 py-1">
@@ -50,6 +53,9 @@
                                 @foreach ($usuarios as $usuario)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td class="px-6 py-2">
+                                            {{ $usuario->roles->pluck('name')->implode(', ') }}
+                                        </td>
                                         <td class="px-6 py-2">
                                             {{ $usuario->name }}
                                         </td>

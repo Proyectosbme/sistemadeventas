@@ -49,7 +49,7 @@ class UsuarioController extends Controller
         $usuario->email = $request->email;
         $usuario->password = Hash::make($request->password);
         $usuario->empresa_id = Auth::user()->empresa_id;
-
+       
         // Guardar usuario
         $usuario->save();
 

@@ -76,7 +76,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="pais"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pais</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">País</label>
                                             <select name="pais" id="select_pais"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                 @foreach ($paises as $paise)
@@ -85,24 +85,22 @@
                                                         {{ $paise->name }}</option>
                                                 @endforeach
                                             </select>
-
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="departamento"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado/Provincia/Region</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado/Provincia/Región</label>
                                             <select name="departamento" id="select_departamento2"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option value="">Selecciona un departamento</option>
                                                 @foreach ($departamentos as $departamento)
                                                     <option value="{{ $departamento->id }}"
-                                                        {{ $empresa->padepartamentos == $departamento->id ? 'selected' : '' }}>
+                                                        {{ $empresa->departamento == $departamento->id ? 'selected' : '' }}>
                                                         {{ $departamento->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <div id="respuesta_pais">
-
-                                            </div>
+                                            <div id="respuesta_pais"></div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -377,39 +375,57 @@
     <script>
         $('#select_pais').on('change', function() {
             var id_pais = $('#select_pais').val();
+
+            // Limpiar selects dependientes
+            $('#select_departamento2').html('<option value="">Selecciona un departamento</option>');
+            $('#select_ciudad2').html('<option value="">Selecciona una ciudad</option>');
+
             if (id_pais) {
                 $.ajax({
                     url: "{{ url('/admin/configuracion/pais/') }}" + '/' + id_pais,
                     type: "GET",
                     success: function(data) {
-                        $('#select_departamento2').css('display', 'none');
+                        // Mostrar el select de departamento y ocultar el de ciudad mientras se selecciona uno
+                        $('#select_departamento2').css('display', 'block');
                         $('#select_ciudad2').css('display', 'none');
-                        $('#respuesta_pais').html(data);
-                        $('#respuesta_estado').html(null);
+
+                        // Insertar los nuevos departamentos en el select
+                        $('#select_departamento2').html(data);
+                    },
+                    error: function() {
+                        alert('Error al obtener los departamentos');
                     }
                 });
             } else {
-                alert('Selccione un pais');
+                alert('Selecciona un país');
             }
         });
-    </script>
 
-    <script>
-        $(document).on('change', '#select_estado', function() {
-            var id_estado = $(this).val();
-            if (id_estado) {
+        // Evento para cuando se seleccione un departamento
+        $(document).on('change', '#select_departamento2', function() {
+            var id_departamento = $(this).val();
+
+            // Limpiar el select de ciudades
+            $('#select_ciudad2').html('<option value="">Selecciona una ciudad</option>');
+
+            if (id_departamento) {
                 $.ajax({
-                    url: "{{ url('/admin/configuracion/estado/') }}" + '/' + id_estado,
+                    url: "{{ url('/admin/configuracion/estado/') }}" + '/' + id_departamento,
                     type: "GET",
                     success: function(data) {
-                        $('#select_ciudad2').css('display', 'none');
-                        $('#respuesta_estado').html(data);
+                        // Mostrar el select de ciudad
+                        $('#select_ciudad2').css('display', 'block');
+
+                        // Insertar las nuevas ciudades en el select
+                        $('#select_ciudad2').html(data);
+                    },
+                    error: function() {
+                        alert('Error al obtener las ciudades');
                     }
                 });
             } else {
-                alert('Selccione un estado');
+                alert('Selecciona un departamento');
             }
-
         });
     </script>
 
