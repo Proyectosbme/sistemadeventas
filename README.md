@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Instalaciones
 
-Instlacion de laravel UI
+InstAlacion de laravel UI
 - Instalacion de una interfas grafica de boostrap
 - **composer require laravel/ui**
 - **php artisan ui bootstrap --auth** actulizamos el contralodar
@@ -83,9 +83,51 @@ Instalacion de [AdminLTE](https://github.com/jeroennoten/Laravel-AdminLTE/wiki/I
 - Luego, puedes realizar los reemplazos de vista ejecutando el siguiente comando artesanal:
 - **php artisan adminlte:install --only=auth_views**
 
+The World es un paquete de Laravel que proporciona una lista de países, estados, ciudades, zonas horarias, monedas e idiomas.
+Se puede consumir con World Facade o las rutas API definidas.
 
 Pagina donde se encueentra el paquete de instalacion [ GitHub World](https://github.com/nnjeim/world).
 - **composer require nnjeim/world**
 - **php artisan world:install**
 - **php artisan db:seed --class=WorldSeeder**
 
+
+Requerir el instalador de Laravel globalmente usando Composer:
+
+- **composer global require laravel/installer**
+
+Asegúrese de colocar el directorio bin del proveedor en su PATH. A continuación, se muestra cómo puede hacerlo según cada sistema operativo:
+
+macOS:export PATH="$PATH:$HOME/.composer/vendor/bin"
+Ventanas:set PATH=%PATH%;%USERPROFILE%\AppData\Roaming\Composer\vendor\bin
+Linux:export PATH="~/.config/composer/vendor/bin:$PATH"
+Crea un nuevo proyecto usando la CLI de Laravel:
+
+Instalar Tailwind CSS y Flowbite usando NPM [Tailwind CSS y Flowbite](https://flowbite.com/docs/getting-started/laravel/):
+- **npm install -D tailwindcss postcss autoprefixer flowbite**
+
+Cree un archivo de configuración CSS de Tailwind:
+- **npx tailwindcss init -p**
+
+Agregue las rutas de visualización y requiera Flowbite como un complemento interno tailwind.config.js:
+module.exports = {
+    content: [
+      "./resources/**/*.blade.php",
+      "./resources/**/*.js",
+      "./resources/**/*.vue",
+      "./node_modules/flowbite/**/*.js"
+    ],
+    theme: {
+      extend: {},
+    },
+    plugins: [
+        require('flowbite/plugin')
+    ],
+  }
+
+Esto le indicará al compilador de Tailwind qué archivos buscar para aplicar correctamente las clases dentro del archivo CSS final y también instalará las opciones de complemento adicionales de Flowbite.
+
+Añade las directivas dentro del ./resources/css/app.cssarchivo:
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
