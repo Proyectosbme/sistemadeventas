@@ -67,6 +67,23 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Instalaciones
 
+Instlacion de laravel UI
+- Instalacion de una interfas grafica de boostrap
+- **composer require laravel/ui**
+- **php artisan ui bootstrap --auth** actulizamos el contralodar
+- **nmp run dev** se ejecutaran las actulizaciones
+
+Instalacion de [AdminLTE](https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Installation)
+-Instale los recursos del paquete necesarios utilizando el siguiente comando:
+- **composer require jeroennoten/laravel-adminlte**
+
+- Instalar el andamiaje de autenticación heredado (opcional)
+- **composer require laravel/ui**
+- **php artisan ui bootstrap --auth**
+- Luego, puedes realizar los reemplazos de vista ejecutando el siguiente comando artesanal:
+- **php artisan adminlte:install --only=auth_views**
+
+
 Pagina donde se encueentra el paquete de instalacion [ GitHub World](https://github.com/nnjeim/world).
 - **composer require nnjeim/world**
 - **php artisan world:install**
