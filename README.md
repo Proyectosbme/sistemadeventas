@@ -46,10 +46,10 @@ Instalacion de [AdminLTE](https://github.com/jeroennoten/Laravel-AdminLTE/wiki/I
 -Instale los recursos del paquete necesarios utilizando el siguiente comando:
 - **composer require jeroennoten/laravel-adminlte**
 
-- Instalar el andamiaje de autenticación heredado (opcional)
+  Instalar el andamiaje de autenticación heredado (opcional)
 - **composer require laravel/ui**
 - **php artisan ui bootstrap --auth**
-- Luego, puedes realizar los reemplazos de vista ejecutando el siguiente comando artesanal:
+  Luego, puedes realizar los reemplazos de vista ejecutando el siguiente comando artesanal:
 - **php artisan adminlte:install --only=auth_views**
 
 The World es un paquete de Laravel que proporciona una lista de países, estados, ciudades, zonas horarias, monedas e idiomas.
@@ -65,12 +65,6 @@ Requerir el instalador de Laravel globalmente usando Composer:
 
 - **composer global require laravel/installer**
 
-Asegúrese de colocar el directorio bin del proveedor en su PATH. A continuación, se muestra cómo puede hacerlo según cada sistema operativo:
-
-macOS:export PATH="$PATH:$HOME/.composer/vendor/bin"
-Ventanas:set PATH=%PATH%;%USERPROFILE%\AppData\Roaming\Composer\vendor\bin
-Linux:export PATH="~/.config/composer/vendor/bin:$PATH"
-Crea un nuevo proyecto usando la CLI de Laravel:
 
 Instalar Tailwind CSS y Flowbite usando NPM [Tailwind CSS y Flowbite](https://flowbite.com/docs/getting-started/laravel/):
 - **npm install -D tailwindcss postcss autoprefixer flowbite**
