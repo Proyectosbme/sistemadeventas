@@ -45,9 +45,14 @@
                                 <h6 class="font-bold text-gray-700 dark:text-gray-400">Fecha de creación:</h6>
                                 <p class="text-gray-900 dark:text-white">{{ $usuario->created_at->format('d/m/Y H:i') }}</p>
                             </div>
+                            <div>
+                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Rol:</h6>
+                                <p class="text-gray-900 dark:text-white">{{ $usuario->getRoleNames()->first() }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

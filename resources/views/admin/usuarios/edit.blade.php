@@ -16,7 +16,7 @@
             </div>
             <hr>
             <div class="flow-root w-full">
-                <form action="{{ url('/admin/usuarios/create') }}" method="post">
+                <form action="{{ url('/admin/usuarios', $usuario->id) }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="grid gap-6 mb-3 md:grid-cols-3">
@@ -27,15 +27,16 @@
                                 class="bg-gray-50 border {{ $errors->has('role') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">Selecciona un rol</option>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->name }}"
-                                        {{ $role->name == $role->name ? 'selected' : '' }}>
-                                        {{ $role->name }}</option>
+                                    <option value="{{ $role->name }}" {{ $usuario->hasRole($role->name) ? 'selected' : '' }}>
+                                        {{ $role->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @if ($errors->has('role'))
                                 <span class="text-red-500 text-sm">{{ $errors->first('role') }}</span>
                             @endif
                         </div>
+
                         <div>
                             <label for="name"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del

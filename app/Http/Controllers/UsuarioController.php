@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 
 class UsuarioController extends Controller
@@ -85,18 +86,32 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
         // Validación de datos
         $request->validate([
             'name' => 'required',
-            'email' =>'required|unique:users,email,'.$id,
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required' // Asegurarse de que el rol sea requerido
         ]);
-        /*provamos que llegan los datos*/
-        $datos = $request->all();
-        return response()->json($datos);
 
+        // Encontrar el usuario por ID
+        $user = User::findOrFail($id);
 
+        // Actualizar los datos del usuario
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // Actualizar el rol del usuario
+        $user->syncRoles([$request->input('role')]); // Asignar el nuevo rol
+
+        // Guardar los cambios del usuario
+        $user->save();
+
+        // Redirigir o devolver una respuesta
+        return redirect()->route('admin.usuarios.index')->with('success', 'Usuario actualizado correctamente.');
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
