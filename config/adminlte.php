@@ -171,12 +171,14 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_card' => 'card-outline card-primary shadow-sm rounded-lg',
+    'classes_auth_header' => 'text-center bg-gradient-primary p-3 rounded-top',
+    'classes_auth_body' => 'p-4 bg-light',
+    'classes_auth_footer' => 'text-center bg-light p-3 rounded-bottom',
+    'classes_auth_icon' => 'fas fa-lg fa-user text-primary',
+    'classes_auth_btn' => 'btn-block btn-primary shadow-sm',
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -190,17 +192,18 @@ return [
     |
     */
 
-    'classes_body' => '',
+    'classes_body' => 'hold-transition sidebar-mini layout-fixed',
     'classes_brand' => '',
-    'classes_brand_text' => '',
-    'classes_content_wrapper' => '',
-    'classes_content_header' => '',
-    'classes_content' => '',
+    'classes_brand_text' => 'font-weight-light text-white',
+    'classes_content_wrapper' => 'content-wrapper bg-light',
+    'classes_content_header' => 'content-header bg-white shadow-sm mb-4',
+    'classes_content' => 'content bg-white p-3',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
-    'classes_topnav_nav' => 'navbar-expand',
-    'classes_topnav_container' => 'container',
+    'classes_topnav' => 'navbar-dark bg-dark',
+    'classes_topnav_nav' => 'navbar-expand-lg',
+    'classes_topnav_container' => 'container-fluid',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -214,15 +217,21 @@ return [
     |
     */
 
-    'sidebar_mini' => 'lg',
-    'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
-    'sidebar_collapse_remember_no_transition' => true,
-    'sidebar_scrollbar_theme' => 'os-theme-light',
-    'sidebar_scrollbar_auto_hide' => 'l',
-    'sidebar_nav_accordion' => true,
-    'sidebar_nav_animation_speed' => 300,
+    'sidebar_mini' => 'md',  // Cambiar de 'lg' a 'md' para una mejor transición visual en pantallas medianas.
+    'sidebar_collapse' => true,  // Habilita el colapso de la sidebar para dar más espacio en el contenido.
+    'sidebar_collapse_auto_size' => true,  // Ajusta automáticamente el tamaño al colapsar, permitiendo un colapso más fluido.
+    'sidebar_collapse_remember' => true,  // Mantiene el estado del colapso al recargar la página.
+    'sidebar_collapse_remember_no_transition' => false,  // Habilita una transición suave cuando se colapsa la barra lateral.
+
+    'sidebar_scrollbar_theme' => 'os-theme-dark',  // Un scrollbar oscuro da un toque más elegante.
+    'sidebar_scrollbar_auto_hide' => 'leave',  // El scrollbar se oculta cuando el ratón no está sobre la barra lateral, lo que le da un diseño más limpio.
+
+    'sidebar_nav_accordion' => false,  // Desactiva el comportamiento de acordeón, permitiendo que varios submenús se expandan simultáneamente.
+    'sidebar_nav_animation_speed' => 200,  // Acelera la animación de expansión/cierre del submenú para una experiencia más rápida.
+    'sidebar_class' => 'sidebar-dark-primary elevation-3',  // Agrega una leve sombra (elevation-3) para mejorar el diseño tridimensional.
+
+    'sidebar_nav_animation' => 'spin',  // Añade una animación de rotación al icono cuando la barra lateral se colapsa/expande.
+
 
     /*
     |--------------------------------------------------------------------------
@@ -294,40 +303,40 @@ return [
     */
 
     'menu' => [
-       // Navbar items:
-      /*  [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        // Navbar items:
+        /*  [
+              'type' => 'navbar-search',
+              'text' => 'search',
+              'topnav_right' => true,
+          ],
+          [
+              'type' => 'fullscreen-widget',
+              'topnav_right' => true,
+          ],
 
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],*/
+          // Sidebar items:
+          [
+              'type' => 'sidebar-menu-search',
+              'text' => 'search',
+          ],*/
         [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-       /* [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],*/
+        /* [
+             'text' => 'pages',
+             'url' => 'admin/pages',
+             'icon' => 'far fa-fw fa-file',
+             'label' => 4,
+             'label_color' => 'success',
+         ],
+         ['header' => 'account_settings'],
+         [
+             'text' => 'profile',
+             'url' => 'admin/settings',
+             'icon' => 'fas fa-fw fa-user',
+         ],*/
         [
             'text' => 'Configuracion',
             'url' => 'admin/configuracion',
@@ -344,7 +353,7 @@ return [
                 [
                     'text' => 'Gestion de roles',
                     'url' => 'admin/roles',
-                    'icon' => 'fas fa-solid fa-screwdriver',
+                    'icon' => 'fas fa-solid fa-gears',
                     'classes' => 'bg-white text-black',
                 ],
                 [
@@ -362,60 +371,60 @@ return [
 
             ],
         ],
-      /*  [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-         ['header' => 'labels'],
-         [
-             'text' => 'important',
-             'icon_color' => 'red',
-             'url' => '#',
-         ],
-         [
-             'text' => 'warning',
-             'icon_color' => 'yellow',
-             'url' => '#',
-         ],
-         [
-             'text' => 'information',
-             'icon_color' => 'cyan',
-             'url' => '#',
-         ],*/
+        /*  [
+              'text' => 'multilevel',
+              'icon' => 'fas fa-fw fa-share',
+              'submenu' => [
+                  [
+                      'text' => 'level_one',
+                      'url' => '#',
+                  ],
+                  [
+                      'text' => 'level_one',
+                      'url' => '#',
+                      'submenu' => [
+                          [
+                              'text' => 'level_two',
+                              'url' => '#',
+                          ],
+                          [
+                              'text' => 'level_two',
+                              'url' => '#',
+                              'submenu' => [
+                                  [
+                                      'text' => 'level_three',
+                                      'url' => '#',
+                                  ],
+                                  [
+                                      'text' => 'level_three',
+                                      'url' => '#',
+                                  ],
+                              ],
+                          ],
+                      ],
+                  ],
+                  [
+                      'text' => 'level_one',
+                      'url' => '#',
+                  ],
+              ],
+          ],
+           ['header' => 'labels'],
+           [
+               'text' => 'important',
+               'icon_color' => 'red',
+               'url' => '#',
+           ],
+           [
+               'text' => 'warning',
+               'icon_color' => 'yellow',
+               'url' => '#',
+           ],
+           [
+               'text' => 'information',
+               'icon_color' => 'cyan',
+               'url' => '#',
+           ],*/
     ],
 
     /*
