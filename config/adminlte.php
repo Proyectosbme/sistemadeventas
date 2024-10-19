@@ -294,36 +294,36 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        /*[
+       // Navbar items:
+      /*  [
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
-        ],*/
+        ],
         [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
         // Sidebar items:
-        /*[
+        [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],*/
-        /*[
+        [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
-        ],*/
-        /*[
+        ],
+       /* [
             'text' => 'pages',
             'url' => 'admin/pages',
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
-        ],*/
-        /*['header' => 'account_settings'],*/
-        /*[
+        ],
+        ['header' => 'account_settings'],
+        [
             'text' => 'profile',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
@@ -333,39 +333,36 @@ return [
             'url' => 'admin/configuracion',
             'icon' => 'fas fa-fw fa-gear',
             'classes' => 'bg-blue text-white',
+            'can' => 'menu-title-configuracion',
 
         ],
         [
-            /*<i class="fa-thin fa-user-check"></i>*/
-            /*<i class="fa-regular fa-list"></i> */
-            'text' => 'Roles',
-            'icon' => 'fas fa-user-check',
+            'text' => 'Seguridad',
+            'icon' => 'fas fa-sharp fa-solid fa-lock',
             'classes' => 'bg-blue text-white',
             'submenu' => [
                 [
-                    'text' => 'Listado de roles',
+                    'text' => 'Gestion de roles',
                     'url' => 'admin/roles',
-                    'icon' => 'fas fa-list',
+                    'icon' => 'fas fa-solid fa-screwdriver',
                     'classes' => 'bg-white text-black',
                 ],
-            ],
-        ],
-        [
-            /*<i class="fa-thin fa-user-check"></i>*/
-            /*<i class="fa-regular fa-list"></i> */
-            'text' => 'Usuarios',
-            'icon' => 'fas fa-users',
-            'classes' => 'bg-blue text-white',
-            'submenu' => [
                 [
-                    'text' => 'Listado de usuarios',
-                    'url' => 'admin/usuarios',
-                    'icon' => 'fas fa-user',
+                    'text' => 'Gestion de permisos',
+                    'url' => 'admin/roles',
+                    'icon' => 'fas fa-sharp fa-solid fa-key',
                     'classes' => 'bg-white text-black',
                 ],
+                [
+                    'text' => 'Gestion de usuarios',
+                    'url' => 'admin/usuarios',
+                    'icon' => 'fas fa-solid fa-users',
+                    'classes' => 'bg-white text-black',
+                ],
+
             ],
         ],
-        [
+      /*  [
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
@@ -403,7 +400,7 @@ return [
                 ],
             ],
         ],
-        /* ['header' => 'labels'],
+         ['header' => 'labels'],
          [
              'text' => 'important',
              'icon_color' => 'red',
