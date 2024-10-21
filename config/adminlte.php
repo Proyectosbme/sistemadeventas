@@ -171,14 +171,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary shadow-sm rounded-lg',
-    'classes_auth_header' => 'text-center bg-gradient-primary p-3 rounded-top',
-    'classes_auth_body' => 'p-4 bg-light',
-    'classes_auth_footer' => 'text-center bg-light p-3 rounded-bottom',
-    'classes_auth_icon' => 'fas fa-lg fa-user text-primary',
-    'classes_auth_btn' => 'btn-block btn-primary shadow-sm',
-
-
+    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_header' => '',
+    'classes_auth_body' => '',
+    'classes_auth_footer' => '',
+    'classes_auth_icon' => '',
+    'classes_auth_btn' => 'btn-flat btn-primary',
 
     /*
     |--------------------------------------------------------------------------
@@ -217,20 +215,16 @@ return [
     |
     */
 
-    'sidebar_mini' => 'md',  // Cambiar de 'lg' a 'md' para una mejor transición visual en pantallas medianas.
-    'sidebar_collapse' => true,  // Habilita el colapso de la sidebar para dar más espacio en el contenido.
-    'sidebar_collapse_auto_size' => true,  // Ajusta automáticamente el tamaño al colapsar, permitiendo un colapso más fluido.
-    'sidebar_collapse_remember' => true,  // Mantiene el estado del colapso al recargar la página.
-    'sidebar_collapse_remember_no_transition' => false,  // Habilita una transición suave cuando se colapsa la barra lateral.
+    'sidebar_mini' => 'lg',
+    'sidebar_collapse' => false,  // Ahora la barra lateral estará abierta por defecto
+    'sidebar_collapse_auto_size' => true,
+    'sidebar_collapse_remember' => true,  // Recordar el estado de la barra lateral entre recargas
+    'sidebar_collapse_remember_no_transition' => true,
+    'sidebar_scrollbar_theme' => 'os-theme-light',
+    'sidebar_scrollbar_auto_hide' => 'l',
+    'sidebar_nav_accordion' => true,
+    'sidebar_nav_animation_speed' => 300,
 
-    'sidebar_scrollbar_theme' => 'os-theme-dark',  // Un scrollbar oscuro da un toque más elegante.
-    'sidebar_scrollbar_auto_hide' => 'leave',  // El scrollbar se oculta cuando el ratón no está sobre la barra lateral, lo que le da un diseño más limpio.
-
-    'sidebar_nav_accordion' => false,  // Desactiva el comportamiento de acordeón, permitiendo que varios submenús se expandan simultáneamente.
-    'sidebar_nav_animation_speed' => 200,  // Acelera la animación de expansión/cierre del submenú para una experiencia más rápida.
-    'sidebar_class' => 'sidebar-dark-primary elevation-3',  // Agrega una leve sombra (elevation-3) para mejorar el diseño tridimensional.
-
-    'sidebar_nav_animation' => 'spin',  // Añade una animación de rotación al icono cuando la barra lateral se colapsa/expande.
 
 
     /*
@@ -338,28 +332,49 @@ return [
              'icon' => 'fas fa-fw fa-user',
          ],*/
         [
-            'text' => 'Configuracion',
-            'url' => 'admin/configuracion',
+            'text' => 'Registro',
             'icon' => 'fas fa-fw fa-gear',
             'classes' => 'bg-blue text-white',
-            'can' => 'menu-title-configuracion',
+            'can' => 'menu-titulo-configuracion',
+            'submenu' => [
+                [
+                    'text' => 'Gestion de empresa',
+                    'url' => 'admin/configuracion',
+                    'icon' => 'fas fa-solid fa-building',
+                    'classes' => 'bg-white text-black',
+                ],
+                [
+                    'text' => 'Gestion de sucursales',
+                    'url' => 'admin/configuracion',
+                    'icon' => 'fas fa-solid fa-location-dot',
+                    'classes' => 'bg-white text-black',
+                ],
+                [
+                    'text' => 'Gestion de personas',
+                    'url' => 'admin/configuracion',
+                    'icon' => 'fas fa-solid fa-person-dots-from-line',
+                    'classes' => 'bg-white text-black',
+                ],
+            ],
 
         ],
         [
             'text' => 'Seguridad',
             'icon' => 'fas fa-sharp fa-solid fa-lock',
             'classes' => 'bg-blue text-white',
+            'can' => 'menu-titulo-seguridad',
             'submenu' => [
+
+                [
+                    'text' => 'Gestion de permisos',
+                    'url' => 'admin/permisos',
+                    'icon' => 'fas fa-sharp fa-solid fa-key',
+                    'classes' => 'bg-white text-black',
+                ],
                 [
                     'text' => 'Gestion de roles',
                     'url' => 'admin/roles',
                     'icon' => 'fas fa-solid fa-gears',
-                    'classes' => 'bg-white text-black',
-                ],
-                [
-                    'text' => 'Gestion de permisos',
-                    'url' => 'admin/roles',
-                    'icon' => 'fas fa-sharp fa-solid fa-key',
                     'classes' => 'bg-white text-black',
                 ],
                 [

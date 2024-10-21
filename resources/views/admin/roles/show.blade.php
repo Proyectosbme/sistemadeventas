@@ -1,52 +1,84 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h3 class="text-xl font-bold leading-none text-gray-900 blue:text-white">Detalle del rol {{ $rol->name }}</h3>
-    <hr>
+    <h3 class="text-3xl font-extrabold text-gray-900 dark:text-white">Detalles del Rol: {{ $rol->name }}</h3>
+    <p class="text-md text-gray-500 dark:text-gray-400">Visualiza la información del rol y sus permisos asignados.</p>
+    <hr class="mt-2 mb-6 border-t-2 border-gray-300">
 @stop
 
 @section('content')
-    <div class="card card-outline card-info" style="box-shadow: 5px 5px 5px 5px #cccccc;">
-        <div class="row">
-            <div class="w-full col-span-12 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <div class="flex items-center justify-between mb-4">
-                    <h5 class="text-l font-bold leading-none text-gray-900 dark:text-white">Datos almacenados</h5>
-                    <a href="{{ url('/admin/roles/') }}"
-                        class="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
-                            <path fill-rule="evenodd"
-                                d="M12.5 9.75A2.75 2.75 0 0 0 9.75 7H4.56l2.22 2.22a.75.75 0 1 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 0 1 1.06 1.06L4.56 5.5h5.19a4.25 4.25 0 0 1 0 8.5h-1a.75.75 0 0 1 0-1.5h1a2.75 2.75 0 0 0 2.75-2.75Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Regresar
-                    </a>
+    <div class="flex flex-col space-y-6">
+        <!-- Tarjeta de Información del Rol -->
+        <div class="rounded-lg bg-white shadow-lg p-6 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <div class="flex justify-between items-center mb-4">
+                <h5 class="text-xl font-bold text-gray-900 dark:text-white">Información del Rol</h5>
+                <a href="{{ url('/admin/roles/') }}"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Regresar
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Detalles del Rol -->
+                <div>
+                    <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">Identificador:</p>
+                    <p class="text-lg text-gray-900 dark:text-white">{{ $rol->id }}</p>
                 </div>
-
-                <div class="flow-root">
-                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Identificador:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $rol->id }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Nombre del rol:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $rol->name }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Medio de creación:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $rol->guard_name }}</p>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">Nombre del Rol:</p>
+                    <p class="text-lg text-gray-900 dark:text-white">{{ $rol->name }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">Medio de Creación:</p>
+                    <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                        {{ $rol->guard_name }}
+                    </span>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">Fecha de Creación:</p>
+                    <p class="text-lg text-gray-900 dark:text-white">{{ $rol->created_at->format('d/m/Y H:i') }}</p>
+                </div>
+                <div>
+                    <p class="text-sm font-semibold text-gray-700 dark:text-gray-300">Última Modificación:</p>
+                    <p class="text-lg text-gray-900 dark:text-white">{{ $rol->updated_at->format('d/m/Y H:i') }}</p>
                 </div>
             </div>
+        </div>
+
+        <!-- Tarjeta de Permisos Asignados -->
+        <div class="rounded-lg bg-white shadow-lg p-6 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Permisos Asignados</h5>
+            @if ($permisos->isEmpty())
+                <p class="text-lg text-gray-900 dark:text-white">No hay permisos asignados a este rol.</p>
+            @else
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    @foreach ($permisos as $permiso)
+                        <div class="flex items-center space-x-2 bg-gray-50 p-3 rounded-lg border border-gray-300 dark:bg-gray-900 dark:border-gray-700">
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ $permiso->name }}</span>
+                            <span class="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                                Asignado
+                            </span>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 @stop
 
 @section('css')
+    <style>
+        /* Estilos personalizados */
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
 @stop
 
 @section('js')
+    <script>
+        // Puedes agregar alguna interacción aquí si es necesario
+    </script>
 @stop

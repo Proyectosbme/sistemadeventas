@@ -17,8 +17,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+
         $empresa_id = Auth::user()->empresa_id;
-        $usuarios = User::where('empresa_id', $empresa_id)->get();
+        $usuarios = User::where('empresa_id', $empresa_id)->paginate(1);
         return view('admin.usuarios.index', compact('usuarios'));
     }
 
@@ -27,7 +28,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::paginate(10);
         return view('admin.usuarios.create', compact('roles'));
     }
 
@@ -118,6 +119,16 @@ class UsuarioController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Buscar el usuario por su ID
+        $usuario = User::findOrFail($id);
+
+        // Eliminar el usuario
+        $usuario->delete();
+
+        // Redirigir al índice de usuarios con un mensaje de éxito
+        return redirect()->route('admin.usuarios.index')
+            ->with('mensaje', 'Usuario eliminado exitosamente')
+            ->with('icono', 'success');
     }
+
 }

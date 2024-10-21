@@ -16,7 +16,7 @@
             </div>
             <hr>
             <div class="flow-root w-full">
-                <form action="{{ url('/admin/usuarios/create') }}" method="post">
+                <form action="{{ route('admin.usuarios.store') }}" method="post">
                     @csrf
                     <div class="grid gap-6 mb-3 md:grid-cols-3">
                         <div>

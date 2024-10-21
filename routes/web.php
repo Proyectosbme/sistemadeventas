@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\RolePermissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuarioController;
@@ -33,46 +33,34 @@ Route::prefix('create-empresa')->controller(EmpresaController::class)->group(fun
 });
 
 Route::middleware('auth')->group(function () {
-     /*Inicio*/
+    /*Inicio*/
     Route::get('/home', [AdminController::class, 'index'])->name('home');
 
-     /*Administrador*/
+    /*Administrador*/
     Route::prefix('admin')->controller(AdminController::class)->group(function () {
         Route::get('/', 'index')->name('admin.index');
         Route::post('/', 'store')->name('admin.empresas.create.store');
     });
 
     /*configuracion*/
+    /* Configuración */
     Route::prefix('admin/configuracion')->controller(EmpresaController::class)->group(function () {
         Route::get('/', 'edit')->name('admin.configuracion.edit');
-        Route::get('/pais/{id_pais}', 'buscar_estado')->name('admin.empresas.create.buscar_estado');
-        Route::get('/estado/{id_estado}', 'buscar_ciudad')->name('admin.empresas.create.buscar_ciudad');
+        Route::get('/pais/{id_pais}', 'buscar_estado')->name('admin.configuracion.buscar_estado');
+        Route::get('/estado/{id_estado}', 'buscar_ciudad')->name('admin.configuracion.buscar_ciudad');
         Route::put('/{id}', 'update')->name('admin.configuracion.update');
     });
 
-    /*Roles*/
-    Route::prefix('admin/roles')->controller(RoleController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.roles.index');
-        Route::get('/create', 'create')->name('admin.roles.create');
-        Route::post('/create', 'store')->name('admin.roles.store');
-        Route::get('/{id}', 'show')->name('admin.roles.show');
-        Route::get('/{id}/edit', 'edit')->name('admin.roles.edit');
-        Route::put('/{id}', 'update')->name('admin.roles.update');
-        Route::delete('/{id}', 'destroy')->name('admin.roles.destroy');
-
-    });
-
+    /* Roles */
+    Route::resource('admin/roles', RoleController::class)
+    ->names('admin.roles')
+    ->middleware('permission:roles-ver|roles-editar|roles-eliminar');
+    /*permisos*/
+    Route::resource('admin/permisos', RolePermissionController::class)->names('admin.permisos');
     /*Usuarios*/
-    Route::prefix('admin/usuarios')->controller(UsuarioController::class)->group(function () {
-        Route::get('/', 'index')->name('admin.usuarios.index');
-        Route::get('/create', 'create')->name('admin.usuarios.create');
-        Route::post('/create', 'store')->name('admin.usuarios.store');
-        Route::get('/{id}', 'show')->name('admin.usuarios.show');
-        Route::get('/{id}/edit', 'edit')->name('admin.usuarios.edit');
-        Route::put('/{id}', 'update')->name('admin.usuarios.update');
-        Route::delete('/{id}', 'destroy')->name('admin.usuarios.destroy');
+    Route::resource('admin/usuarios', UsuarioController::class)->names('admin.usuarios');
 
-    });
+
 
 
 });
