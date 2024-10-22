@@ -53,8 +53,8 @@ Route::middleware('auth')->group(function () {
 
     /* Roles */
     Route::resource('admin/roles', RoleController::class)
-    ->names('admin.roles')
-    ->middleware('permission:roles-ver|roles-editar|roles-eliminar');
+    ->names('admin.roles');
+    //->middleware('permission:menu-titulo-seguridad');
     /*permisos*/
     Route::resource('admin/permisos', RolePermissionController::class)->names('admin.permisos');
     /*Usuarios*/

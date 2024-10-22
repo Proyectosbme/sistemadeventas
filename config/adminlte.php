@@ -335,7 +335,7 @@ return [
             'text' => 'Registro',
             'icon' => 'fas fa-fw fa-gear',
             'classes' => 'bg-blue text-white',
-            'can' => 'menu-titulo-configuracion',
+           'can' => 'menu-titulo-configuracion',
             'submenu' => [
                 [
                     'text' => 'Gestion de empresa',

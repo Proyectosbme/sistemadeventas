@@ -67,7 +67,7 @@
                                             </svg>
                                             <span class="ml-1"></span>
                                         </a>
-                                        @can('roles-eliminar')
+
                                             <form action="{{ url('/admin/roles', $rol->id) }}" method="POST"
                                                 onsubmit="preguntar(event, {{ $rol->id }})"
                                                 id="miFormulario{{ $rol->id }}">
@@ -84,7 +84,7 @@
                                                     <span class="ml-1"></span>
                                                 </button>
                                             </form>
-                                        @endcan
+
                                         <script>
                                             function preguntar(event, rolId) {
                                                 event.preventDefault(); // Corrige el error tipográfico

@@ -15,9 +15,9 @@ class RoleController extends Controller
     public function __construct()
     {
         // Aplicar permisos específicos a cada acción del controlador
-        $this->middleware('permission:roles-ver')->only('index', 'show');
-        $this->middleware('permission:roles-crear')->only('create', 'store');
-        $this->middleware('permission:roles-editar')->only('edit', 'update');
+       // $this->middleware('permission:roles-ver')->only('index', 'show');
+       // $this->middleware('permission:roles-crear')->only('create', 'store');
+       // $this->middleware('permission:roles-editar')->only('edit', 'update');
         $this->middleware('permission:roles-eliminar')->only('destroy');
     }
     /**
