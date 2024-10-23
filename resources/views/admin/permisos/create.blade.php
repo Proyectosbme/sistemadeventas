@@ -1,8 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h3 class="text-xl font-bold leading-none text-gray-900 blue:text-white">Crear Permiso</h3>
-    <hr>
+    <x-general.titulo-con-hr titulo="Crear Permiso" />
 @stop
 
 @section('content')
@@ -10,17 +9,13 @@
         <div class="w-full col-span-12 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <form action="{{ route('admin.permisos.store') }}" method="POST">
                 @csrf
-                <div class="mb-4">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del permiso</label>
-                    <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                </div>
-                <div class="mb-4">
-                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción del permiso</label>
-                    <textarea id="description" name="description" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
-                </div>
+                <x-general.form-grid :columns="1">
+                    <x-general.form-group label="Nombre del permiso" name="name" placeholder="Ingrese el nombre del permiso..." :required="true" :error="$errors->first('name')" />
+                    <x-general.form-group-textarea label="Descripción del permiso" name="description" rows="3" placeholder="Ingrese la descripción del permiso..." :required="false" :error="$errors->first('description')" />
+                </x-general.form-grid>
                 <div class="flex items-center justify-end mt-4">
-                    <a href="{{ route('admin.permisos.index') }}" class="px-4 py-2 mr-2 text-sm font-medium text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">Cancelar</a>
-                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500">Guardar</button>
+                    <x-botones.cancelar :action="route('admin.permisos.index')" />
+                    <x-botones.crear>Guardar</x-botones.crear>
                 </div>
             </form>
         </div>
@@ -32,3 +27,4 @@
 
 @section('js')
 @stop
+

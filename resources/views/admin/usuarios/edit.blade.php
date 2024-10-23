@@ -1,9 +1,7 @@
 @extends('adminlte::page')
 
-
 @section('content_header')
-    <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Datos de usuario {{ $usuario->name }}</h3>
-    <hr>
+    <x-general.titulo-con-hr titulo="Datos de usuario {{ $usuario->name }}" />
 @stop
 
 @section('content')
@@ -11,100 +9,40 @@
     <div class="row mx-auto">
         <div
             class="w-full col-span-4 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="flex items-center justify-between mb-4">
-                <h5 class="text-l font-bold leading-none text-gray-900 dark:text-white">Modificque los datos</h5>
-            </div>
-            <hr>
+            <x-general.titulo-con-hr titulo="Modifique los datos" />
             <div class="flow-root w-full">
                 <form action="{{ url('/admin/usuarios', $usuario->id) }}" method="post">
                     @csrf
                     @method('PUT')
-                    <div class="grid gap-6 mb-3 md:grid-cols-3">
-                        <div>
-                            <label for="role"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rol</label>
-                            <select name="role" id="role"
-                                class="bg-gray-50 border {{ $errors->has('role') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="">Selecciona un rol</option>
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->name }}" {{ $usuario->hasRole($role->name) ? 'selected' : '' }}>
-                                        {{ $role->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('role'))
-                                <span class="text-red-500 text-sm">{{ $errors->first('role') }}</span>
-                            @endif
-                        </div>
+                    <x-general.form-grid :columns="3">
+                        <x-general.form-group-select label="Rol" name="role" :options="$roles->pluck('name')" :selected="$usuario->roles->pluck('name')->toArray()"
+                            placeholder="Selecciona un rol" :required="true" :error="$errors->first('role')" />
 
-                        <div>
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre del
-                                usuario</label>
-                            <input type="text" id="name" name="name" value="{{$usuario->name}}"
-                                class="bg-gray-50 border {{ $errors->has('name') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Ingrese el nombre..." required />
-                            @if ($errors->has('name'))
-                                <span class="text-red-500 text-sm">{{ $errors->first('name') }}</span>
-                            @endif
-                        </div>
-                        <div>
-                            <label for="email"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo</label>
-                            <input type="email" id="email" value="{{ $usuario->email }}" name="email"
-                                class="bg-gray-50 border {{ $errors->has('email') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="correo@domionio.com" required />
-                            @if ($errors->has('email'))
-                                <span class="text-red-500 text-sm">{{ $errors->first('email') }}</span>
-                            @endif
-                        </div>
-                        <div class="mb-6">
-                            <label for="password"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" id="password" name="password"   value="{{ old('password') }}"
-                                class="bg-gray-50 border {{ $errors->has('password') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="•••"  />
-                            @if ($errors->has('password'))
-                                <span class="text-red-500 text-sm">{{ $errors->first('password') }}</span>
-                            @endif
-                        </div>
-                        <div class="mb-6">
-                            <label for="password_confirmation"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmar
-                                password</label>
-                            <input type="password" id="password_confirmation" name="password_confirmation"
-                                  value="{{ old('password_confirmation') }}"
-                                class="bg-gray-50 border {{ $errors->has('password_confirmation') ? 'border-red-500' : 'border-gray-300' }} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="•••"  />
-                            @if ($errors->has('password_confirmation'))
-                                <span class="text-red-500 text-sm">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
-                        </div>
+                        <x-general.form-group label="Nombre del usuario" name="name" :value="$usuario->name"
+                            placeholder="Ingrese el nombre..." :required="true" :error="$errors->first('name')" />
+
+                        <x-general.form-group label="Correo" type="email" name="email" :value="$usuario->email"
+                            placeholder="correo@dominio.com" :required="true" :error="$errors->first('email')" />
+
+                        <x-general.form-group label="Password" type="password" name="password" placeholder="•••"
+                            :error="$errors->first('password')" />
+
+                        <x-general.form-group label="Confirmar Password" type="password" name="password_confirmation"
+                            placeholder="•••" :error="$errors->first('password_confirmation')" />
+                    </x-general.form-grid>
+
+                    <div class="flex justify-end mt-4 space-x-2">
+                        <x-botones.crear>Registrar</x-botones.crear>
+                        <x-botones.cancelar :action="route('admin.usuarios.index')" />
                     </div>
-
-                    <button type="submit"
-                        class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white  bg-blue-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Registrar
-                    </button>
                 </form>
-
             </div>
         </div>
-
     </div>
 @stop
 
 @section('css')
-
 @stop
-<!-- alertas -->
+
 @section('js')
-
-
-
 @stop
