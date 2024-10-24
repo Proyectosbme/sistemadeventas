@@ -1,61 +1,29 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h3 class="text-xl font-bold leading-none text-gray-900 blue:text-white">Detalle del usuario {{ $usuario->name }}</h3>
+    <x-general.titulo :titulo="'Detalle del usuario: ' . $usuario->name" :descripcion="'Visualiza los datos del usuario almacenado.'" />
     <hr>
 @stop
 
 @section('content')
-    <div class="card card-outline card-info" style="box-shadow: 5px 5px 5px 5px #cccccc;">
-        <div class="row">
-            <div class="w-full col-span-12 p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <div class="flex items-center justify-between mb-4">
-                    <h5 class="text-l font-bold leading-none text-gray-900 dark:text-white">Datos almacenados</h5>
-                    <a href="{{ url('/admin/usuarios/') }}"
-                        class="inline-flex items-center px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
-                            <path fill-rule="evenodd"
-                                d="M12.5 9.75A2.75 2.75 0 0 0 9.75 7H4.56l2.22 2.22a.75.75 0 1 1-1.06 1.06l-3.5-3.5a.75.75 0 0 1 0-1.06l3.5-3.5a.75.75 0 0 1 1.06 1.06L4.56 5.5h5.19a4.25 4.25 0 0 1 0 8.5h-1a.75.75 0 0 1 0-1.5h1a2.75 2.75 0 0 0 2.75-2.75Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        Regresar
-                    </a>
-                </div>
+    <!-- Tarjeta de Información del Usuario -->
+    <x-contenedor :titulo="'Datos almacenados'">
+        <x-slot name="slot">
+            <x-botones.volver :action="url('/admin/usuarios/')" />
+        </x-slot>
 
-                <div class="flow-root">
-                    <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Identificador:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $usuario->id }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Nombre del usuario:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $usuario->name }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Correo:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $usuario->email }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Empresa:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $usuario->empresa->nombre_empresa }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Fecha de creación:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $usuario->created_at->format('d/m/Y H:i') }}</p>
-                            </div>
-                            <div>
-                                <h6 class="font-bold text-gray-700 dark:text-gray-400">Rol:</h6>
-                                <p class="text-gray-900 dark:text-white">{{ $usuario->getRoleNames()->first() }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+        <x-slot name="contenido">
+            <!-- Detalles del Usuario en 2 columnas -->
+            <x-general.columna :columns="3">
+                <x-general.label-valor label="Identificador" :valor="$usuario->id" />
+                <x-general.label-valor label="Nombre del usuario" :valor="$usuario->name" />
+                <x-general.label-valor label="Correo" :valor="$usuario->email" />
+                <x-general.label-valor label="Empresa" :valor="$usuario->empresa->nombre_empresa" />
+                <x-general.label-valor label="Fecha de creación" :valor="$usuario->created_at->format('d/m/Y H:i')" />
+                <x-general.label-valor label="Rol" :valor="$usuario->getRoleNames()->first()" />
+            </x-general.columna>
+        </x-slot>
+    </x-contenedor>
 @stop
 
 @section('css')

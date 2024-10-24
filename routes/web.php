@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\RolePermissionController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
