@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Spatie\Permission\Models\Permission;
@@ -37,7 +38,7 @@ class RolePermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:permissions',
@@ -69,7 +70,7 @@ class RolePermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id): Factory|View
     {
         $permiso = Permission::findOrFail($id);
         return view('admin.permisos.edit', compact('permiso'));
@@ -80,10 +81,9 @@ class RolePermissionController extends Controller
      * Update the specified permission in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Permission  $permiso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permiso)
+    public function update(Request $request, Permission $permiso):RedirectResponse
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -103,7 +103,7 @@ class RolePermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id):RedirectResponse
     {
         $permiso = Permission::findOrFail($id);
         $permiso->delete();
